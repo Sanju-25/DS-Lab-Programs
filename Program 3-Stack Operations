@@ -1,0 +1,132 @@
+#Stack Operations
+
+#include<stdio.h>
+#define MAX 5
+int top = -1;
+int s[MAX-1];
+
+void push(int elem)
+{
+	if(top == MAX-1)
+	{
+		printf("\nStack overflow!");
+	}
+	else
+	{	top = top+1;
+		s[top] = elem;
+	}
+}
+
+int pop()
+{
+	int del;
+	if(top == -1)
+	{
+		printf("\nStack overflow");
+		return (-1);
+	}
+	else
+	{
+		del = s[top];
+		top = top-1;
+		return(del);
+	}
+}
+
+void display()
+{
+	int i;
+	if(top == -1)
+	{
+		printf("\nStack overflow!");
+	}
+	else 
+	{	
+		printf("\n The elements of the stack are: ");
+		for(i=top; i>=0; i--)
+		{
+			printf("\t%d",s[i]);
+		}
+	}
+}
+
+int palindrome()
+{
+	int n, i, p[10], flag = 0;
+	printf("\n Enter the number of digits: ");
+	scanf("%d",&n);
+	printf("\n Enter the digits: ");
+	for(i=0; i<n; i++)
+	{
+		scanf("%d",&p[i]);
+	}
+	for(i=0; i<n; i++)
+	{
+		push(p[i]);
+	}
+	for(i=0; i<n; i++)
+	{
+		if(p[i]!=pop())
+		{
+			flag = 1;
+			break;
+		}
+	}
+	if(flag == 0)
+	{
+		printf("\n It is a PALINDROME!");
+	}
+	else
+	{	
+		printf("\n It is NOT A PALINDROME!");
+	}
+} 
+
+int main()
+{
+	int ch, elem, del_elem, flag;
+	for( ; ; )
+	{
+		printf("\n------------------\n");
+		printf("\nSTACK OPERATIONS\n");
+		printf("\n 1:Push");
+		printf("\n 2:Pop");
+		printf("\n 3:Check");
+		printf("\n 4:Display");
+		printf("\n 5:Exit");
+		printf("\n-------------------\n");
+		printf("\n Enter the choice: ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("Enter the element to be pushed into the stack: ");
+				scanf("%d", &elem);
+				push(elem);
+				break;
+			case 2:
+				del_elem = pop();
+				if(del_elem == -1)
+				{
+					printf("\n No element to delete!\n");
+				}
+				else
+				{
+					printf("\n The deleted element is: %d", del_elem);
+				}
+				break;
+			case 3:
+				palindrome();
+				break;
+			case 4:
+				display();
+				break;
+			case 5:
+				return 0;
+		}
+	}
+	return 0;
+}
+}
+		
+		
