@@ -1,0 +1,89 @@
+# DS-Lab-Programs
+All the programs I did in our Data Structures Lab in 3rd Semester
+
+#Evaluation Of Suffix Expression
+
+#include<stdio.h>
+#include<math.h>
+#define MAX 100
+
+int top = -1;
+double s[MAX];
+
+void push(double elem)
+{
+	if (top == MAX-1)
+	{
+		printf("\nStack Overflow!!");
+	}
+	else
+	{
+		top = top+1;
+		s[top] = elem;
+	}
+}
+
+double pop()
+{
+	double del;
+	if(top == -1)
+	{
+		printf("\nStack Underflow!!");
+	}
+	else
+	{
+		del = s[top];
+		top = top -1;
+		return(del);
+	}
+}
+
+double evaluate(char op, double op1, double op2)
+{
+	switch(op)
+	{
+		case '+': return(op1 + op2);
+		case '-': return(op1 - op2);
+		case '*': return(op1 * op2);
+		case '/': return(op1 / op2);
+		case '%': return(fmod(op1, op2));
+		case '^': return(pow(op1, op2));
+		default: printf("\nInvalid Operator!");
+	}
+}
+
+int main()
+{
+	char suffix[50];
+	int i;
+	double val, op1, op2, res;
+	
+	printf("\n Enter the Suffix Expression: ");
+	scanf("%s", suffix);
+	for(i=0; suffix[i]!='\0'; i++)
+	{
+		if(isdigit (suffix[i]))	
+		{
+			push(suffix[i] - '0');
+		}
+		else if(isalpha (suffix[i]))
+		{
+			printf("\nEnter the value of %c: ", suffix[i]);
+			scanf("%lf", &val);
+			push(val);
+		}
+		else
+		{
+			op2 = pop();
+			op1 = pop();
+			res = evaluate(suffix[i], op1, op2);
+			push(res);
+		}
+	}
+	res = pop();
+	printf("\nThe result is %lf", res);
+	return 0;
+}
+
+	
+		
