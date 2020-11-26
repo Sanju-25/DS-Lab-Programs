@@ -1,0 +1,131 @@
+#Array Operations
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int a[20], n;
+
+void create()
+{
+	int i;
+	printf("Enter the number of elements: ");
+	scanf("%d", &n);
+	printf("Enter the elements of the array: \n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d", &a[i]);
+	}
+}
+
+void display()
+{
+	int i;
+	
+	if(n==0)
+	{
+		printf("No elements present in the array");
+	}
+	else
+	{
+		printf("The elements present in the array are: \n");
+		for(i=0;i<n;i++)
+		{
+			printf("%d\t", a[i]);
+		}
+	}
+}
+void insert()
+{
+	int i, pos, ele;/*pos - position; ele - element*/
+	printf("Enter the element to be inserted: ");
+	scanf("%d", &ele);
+	printf("Enter the position where the element has to be inserted: ");
+	scanf("%d", &pos);
+	
+	if(pos<1 || pos>n)
+	{
+		printf("Invalid Position!\n");
+	}
+	else
+	{
+		for(i=n-1;i>=pos-1;i--)
+		{
+			a[i+1] = a[i];
+		}
+		a[pos-1] = ele;
+		n++;
+		
+		printf("The array after inserting the elements is: \n");
+		for(i=0;i<n;i++)
+		{
+			printf("%d\t", a[i]);
+		}
+	}
+}
+
+void delete()
+{
+	int i, pos, ele;
+	printf("Enter the position of the element you want to delete: ");
+	scanf("%d", &pos);
+	if(pos<1 || pos>n)
+	{
+		printf("Invalid Position!\n");
+	}
+	else
+	{
+		for(i=pos-1;i<n-1;i++)
+		{
+			a[i] = a[i+1];
+		}
+		n--;
+		
+		printf("The array after deleting the element: \n");
+		for(i=0;i<n;i++)
+		{
+			printf("%d\t", a[i]);
+		}
+	}
+
+}
+
+int main()
+{
+	int choice;
+	
+	while(1)
+	{
+		printf("\n\nArray Operations\n");
+		printf("* * * * * * * * * * * * *\n\n");
+		printf("1: Create an Array\n");
+		printf("2: Display the array\n");
+		printf("3: Insert an element in the array\n");
+		printf("4: Delete an element from the element\n");
+		printf("5: Exit\n\n");
+		printf("* * * * * * * * * * * * *\n\n");
+		printf("Enter the Choice: ");
+		scanf("%d", &choice);
+		switch(choice)
+		{
+			case 1: 
+				create();
+				break;	
+			case 2:
+				display();
+				break;				
+			case 3:
+				insert();
+				break;				
+			case 4:
+				delete();
+				break;				
+			case 5:
+				return 0;
+		}
+	}
+	return 0;
+}
+			
+				
+	
